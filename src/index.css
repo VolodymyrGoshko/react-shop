@@ -1,0 +1,78 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body::-webkit-scrollbar,
+.box-item::-webkit-scrollbar{
+    width: 10px;
+}
+
+body::-webkit-scrollbar-thumb,
+.box-item::-webkit-scrollbar-thumb{
+    background-color: #ccc;
+    border-radius: 20px;
+}
+
+#root {
+    overflow: hidden;
+}
+
+.productItem:hover {
+    transition: opacity .3s linear;
+    opacity: .5;
+}
+
+.box-item {
+    height: 320px;
+    overflow-y: scroll;
+}
+
+/* Loader */
+.loader-box {
+    width: 100px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 50px auto 0;
+}
+
+.loader{
+    position: relative;
+    width: 70px;
+    height: 70px;
+}
+
+.loader span {
+    position: absolute;
+    top:0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform: rotate(calc(18deg * var(--i)));
+}
+
+.loader span::before {
+    content:'';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 10px;
+    height: 10px;
+    background: #000;
+    border-radius: 50%;
+    transform: scale(0);
+    animation: animate 2s linear infinite;
+    animation-delay: calc(0.1s * var(--i));
+}
+@keyframes animate {
+    0%{
+        transform: scale(0);
+    }
+    10%{
+        transform: scale(1.2);
+    }
+    80%,100%{
+        transform: scale(0);
+    }
+}
