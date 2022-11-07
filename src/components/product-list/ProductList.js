@@ -1,4 +1,4 @@
-import React, {useContext} from "react"
+import React from "react"
 import {useGetProductsAllQuery} from "../../redux/products/products.api"
 import {ProductItem} from "../product-item/ProductItem"
 import {Loader} from "../loader/Loader"
