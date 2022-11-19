@@ -1,17 +1,17 @@
-import React, {useContext, useState} from "react"
-import {useGetProductByCategoryQuery} from "../../redux/products/products.api"
+import React, {useContext} from "react"
 import {Link} from "react-router-dom"
+import {useGetProductByCategoryQuery} from "../../redux/products/products.api"
 import {faCartShopping, faCheck, faStar} from "@fortawesome/free-solid-svg-icons"
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
 import {Loader} from "../loader/Loader"
 import {useDispatch, useSelector} from "react-redux"
 import {addProductToCart} from "../../redux/products/products.slice"
 import {Context} from "../../context/context"
+import {Colors} from "../optionsProduct/Colors"
+import {Sizes} from "../optionsProduct/Sizes"
+import {Brands} from "../optionsProduct/Brands"
 
 export function ProductDetailItem({product, refetch, status}) {
-    const [selectedColor, setSelectedColor] = useState(0)
-    const [selectedSize, setSelectedSize] = useState(0)
-    const [selectedBrand, setSelectedBrand] = useState(0)
     const contextId = useContext(Context)
     const {cart} = useSelector(state => state.product)
 
@@ -21,9 +21,7 @@ export function ProductDetailItem({product, refetch, status}) {
     const isCart = !!cart.find(el => el.id === product.id)
     const dispatch = useDispatch()
 
-    const addProduct = () => {
-        dispatch(addProductToCart(product))
-    }
+    const addProduct = () => dispatch(addProductToCart(product))
 
     const countStar = rating => {
         const arr = []
@@ -35,105 +33,10 @@ export function ProductDetailItem({product, refetch, status}) {
     }
 
     const optionsProduct = category => {
-        const colors = [
-            { class: 'bg-white', selectedClass: 'ring-gray-400' },
-            { class: 'bg-blue-500', selectedClass: 'ring-gray-400' },
-            { class: 'bg-black', selectedClass: 'ring-gray-400' },
-            { class: 'bg-yellow-500', selectedClass: 'ring-gray-400' }
-        ]
-
-        const size = [
-            { content: 'xs', selectedClass: 'ring-indigo-600' },
-            { content: 's', selectedClass: 'ring-indigo-600' },
-            { content: 'm', selectedClass: 'ring-indigo-600' },
-            { content: 'l', selectedClass: 'ring-indigo-600' },
-            { content: 'xl', selectedClass: 'ring-indigo-600' },
-            { content: '2xl', selectedClass: 'ring-indigo-600' }
-        ]
-
-        const brands = [
-            { content: 'samsung', selectedClass: 'ring-indigo-600' },
-            { content: 'asus', selectedClass: 'ring-indigo-600' },
-            { content: 'lg', selectedClass: 'ring-indigo-600' },
-            { content: 'apple', selectedClass: 'ring-indigo-600' },
-            { content: 'xiaomi', selectedClass: 'ring-indigo-600' },
-            { content: 'lenovo', selectedClass: 'ring-indigo-600' }
-        ]
-
-        const renderSize = () => {
-            return (
-                <div className='pt-6 w-fit lg:w-[320px]'>
-                    <div className='flex justify-between'>
-                        <span className='text-base'>Size</span>
-                        <button className='text-indigo-600 font-medium hover:text-indigo-500 transition'>Size guide</button>
-                    </div>
-                    <div className='flex justify-start flex-wrap lg:justify-between'>
-                        {
-                            size.map((item, index) => (
-                                <button
-                                    key={index}
-                                    className={`py-4 bg-white text-black mt-4 mr-2 text-md uppercase rounded border ring-offset-1 w-[60px] sm:w-[75px] lg:w-[95px] ${selectedSize === index && item.selectedClass + ' ring-2'} focus:text-indigo-600`}
-                                    onClick={() => setSelectedSize(index)}
-                                >
-                                    {item.content}
-                                </button>
-                            ))
-                        }
-                    </div>
-                </div>
-            )
-        }
-
-        switch (category) {
-            case "men's clothing":
-            case "women's clothing":
-                return (
-                    <>
-                        <>
-                            <span className='text-lg'>Color</span>
-                            <div className='flex items-center my-4'>
-                                {
-                                    colors.map((item, index) => (
-                                        <button
-                                            key={index}
-                                            className={`${item.class} ${selectedColor === index && item.selectedClass + ' ring-2'}  ring-offset-1 w-[40px] h-[40px] border mr-2 rounded-full`}
-                                            onClick={() => setSelectedColor(index)}
-                                        ></button>
-                                    ))
-                                }
-                            </div>
-                        </>
-                        {renderSize()}
-                    </>
-                )
-            case "jewelery":
-                return renderSize()
-            case "electronics":
-                return (
-                    <div className='pt-6 w-fit lg:w-[320px]'>
-                        <div className='capitalize'>
-                            compatibility with the brand
-                        </div>
-                        <div className='flex justify-start flex-wrap lg:justify-between'>
-                            {
-                                brands.map((item, index) => (
-                                    <button
-                                        key={index}
-                                        className={`py-4 bg-white text-black mt-4 mr-2 text-sm uppercase rounded border ring-offset-1 w-[75px] lg:w-[95px] sm:text-base ${selectedBrand === index && item.selectedClass + ' ring-2'} focus:text-indigo-600`}
-                                        onClick={() => setSelectedBrand(index)}
-                                    >
-                                        {item.content}
-                                    </button>
-                                ))
-                            }
-                        </div>
-                    </div>
-                )
-            default:
-                return
-        }
+        if (category === 'men\'s clothing' || category === 'women\'s clothing') return <Colors />
+        if (category === 'jewelery') return <Sizes />
+        if (category === 'electronics') return <Brands />
     }
-
 
     const clickHandler = (productId) => {
         contextId.id = productId
@@ -141,8 +44,6 @@ export function ProductDetailItem({product, refetch, status}) {
         if (status === "fulfilled") {
             document.body.scrollIntoView()
         }
-        setSelectedColor(0)
-        setSelectedSize(0)
     }
 
     return (

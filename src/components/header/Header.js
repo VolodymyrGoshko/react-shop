@@ -9,9 +9,8 @@ import {CartShopping} from "../cart-shopping/CartShopping"
 export function Header() {
     const {cart, btnCart} = useSelector(state => state.product)
     const dispatch = useDispatch()
-    const toggleCart = () => {
-        dispatch(toggleBtnCart(true))
-    }
+
+    const toggleCart = () => dispatch(toggleBtnCart(true))
 
     btnCart
         ? document.querySelector('body').style.overflow = 'hidden'
@@ -25,9 +24,7 @@ export function Header() {
                     <li className='mr-4 px-[8px] py-1 rounded hover:bg-gray-600 transition cursor-not-allowed'>
                         <FontAwesomeIcon icon={faUser} className='text-xl'/>
                     </li>
-                    <button className='px-[6px] py-1 rounded hover:bg-gray-600 transition relative' onClick={() => {
-                        toggleCart()
-                    }}>
+                    <button className='px-[6px] py-1 rounded hover:bg-gray-600 transition relative' onClick={toggleCart}>
                         <FontAwesomeIcon icon={faCartShopping} className='text-xl'/>
                         {cart.length > 0 && <span className='absolute right-[-7px] top-0 bg-[#00a046] text-[12px] h-[10px] flex items-center justify-center px-[7px] py-[10px] rounded-full'>{cart.length}</span>}
                     </button>

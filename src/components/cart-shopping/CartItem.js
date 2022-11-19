@@ -7,9 +7,11 @@ import {faPlus, faMinus, faTrashCan} from "@fortawesome/free-solid-svg-icons"
 export function CartItem({item}) {
     const dispatch = useDispatch()
 
-    const removeItem = (id) => {
-        dispatch(removeItemFromCart(id))
-    }
+    const incrementProduct = id => dispatch(incrementProductInCart(id))
+    const decrementProduct = id => dispatch(decrementProductInCart(id))
+    const removeProduct = id => dispatch(removeItemFromCart(id))
+
+    const sum = item.price * item.quantity
 
     return (
         <div className='py-4 px-2 sm:px-4 border-b'>
@@ -18,7 +20,7 @@ export function CartItem({item}) {
                     <img className='w-[60px]' src={item.image} alt={item.title}/>
                     <span className='pl-3 pt-2 text-sm sm:text-lg'>{item.title}</span>
                 </div>
-                <button className='h-fit pt-2 cursor-pointer' onClick={() => removeItem(item.id)}>
+                <button className='h-fit pt-2 cursor-pointer' onClick={() => removeProduct(item.id)}>
                     <FontAwesomeIcon icon={faTrashCan} className='text-xl text-[#3e77aa] hover:text-red-500 transition'/>
                 </button>
             </div>
@@ -28,19 +30,19 @@ export function CartItem({item}) {
                     <button
                         className={item.quantity > 1 ? 'text-[#3e77aa]' : 'text-black'}
                         disabled={item.quantity <= 1}
-                        onClick={() => dispatch(decrementProductInCart(item.id))}
+                        onClick={() => decrementProduct(item.id)}
                     >
                         <FontAwesomeIcon  icon={faMinus}/>
                     </button>
                     <span className='mx-2 border px-2 py-1 rounded-md sm:px-4 sm:py-2'>{item.quantity}</span>
                     <button
                         className='text-[#3e77aa]'
-                        onClick={() => dispatch(incrementProductInCart(item.id))}
+                        onClick={() => incrementProduct(item.id)}
                     >
                         <FontAwesomeIcon icon={faPlus}/>
                     </button>
                 </div>
-                <span className='text-lg'>${item.price * item.quantity}</span>
+                <span className='text-lg'>${sum}</span>
             </div>
         </div>
     )
