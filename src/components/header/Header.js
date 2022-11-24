@@ -17,7 +17,7 @@ export function Header() {
         : document.querySelector('body').style.overflow = 'visible'
 
     return (
-        <header className='w-screen bg-[#221f1f] fixed z-10'>
+        <header className='w-screen bg-[#221f1f] fixed z-10 top-0 h-[50px]'>
             <div className='container text-lg flex justify-between items-center text-white h-[50px] max-w-[1240px] m-auto px-2'>
                 <Link to='/'>React Shop</Link>
                 <ul className='flex justify-between'>
