@@ -2,9 +2,27 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button {
+        @apply appearance-none;
+    }
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+}
+
 body::-webkit-scrollbar,
 .box-item::-webkit-scrollbar{
     width: 10px;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
 body::-webkit-scrollbar-thumb,
@@ -14,6 +32,10 @@ body::-webkit-scrollbar-thumb,
 }
 
 #root {
+    height: 100%;
+}
+
+body {
     overflow: hidden;
 }
 

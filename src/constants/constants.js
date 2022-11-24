@@ -22,3 +22,29 @@ export const optionsProducts = {
         {content: 'lenovo', selectedClass: 'ring-indigo-600'}
     ]
 }
+
+export const inputsCategory = [
+    {id: "men's clothing", textContext: "Men's clothing"},
+    {id: "women's clothing", textContext: "Women's clothing"},
+    {id: "jewelery", textContext: "Jewelery"},
+    {id: "electronics", textContext: "Electronics"}
+]
+
+export const inputsRating = [
+    {
+        type: 'checkbox',
+        id: 'above',
+        classInput: 'w-[15px]',
+        classDiv: 'flex',
+        classLabel: 'pl-1 cursor-pointer',
+        textContent: 'Above average'
+    },
+    {
+        type: 'checkbox',
+        id: 'below',
+        classInput: 'w-[15px]',
+        classDiv: 'flex mt-2',
+        classLabel: 'pl-1 cursor-pointer',
+        textContent: 'Below average'
+    }
+]
