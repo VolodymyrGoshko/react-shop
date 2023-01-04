@@ -42,7 +42,11 @@ export function ProductDetailItem({product, refetch, status}) {
         contextId.id = productId
         refetch()
         if (status === "fulfilled") {
-            document.body.scrollIntoView()
+            const body = document.querySelector('body').getBoundingClientRect().top + window.scrollY
+            window.scroll({
+                top: body,
+                behavior: 'smooth'
+            })
         }
     }
 
