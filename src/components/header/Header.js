@@ -1,16 +1,16 @@
 import React from "react"
 import {useDispatch, useSelector} from "react-redux"
-import {toggleBtnCart} from "../../redux/products/products.slice"
+import {toggleBtnCart, toggleSearchForm} from "../../redux/products/products.slice"
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
-import {faCartShopping,faUser} from '@fortawesome/free-solid-svg-icons'
-import {Link} from "react-router-dom"
+import {faCartShopping, faSearch, faUser} from '@fortawesome/free-solid-svg-icons'
 import {CartShopping} from "../cart-shopping/CartShopping"
+import {Search} from "../search/Search"
 
 export function Header() {
     const {cart, btnCart} = useSelector(state => state.product)
     const dispatch = useDispatch()
-
     const toggleCart = () => dispatch(toggleBtnCart(true))
+    const toggleSearch = () => dispatch(toggleSearchForm(true))
 
     btnCart
         ? document.querySelector('body').style.overflow = 'hidden'
@@ -19,9 +19,13 @@ export function Header() {
     return (
         <header className='w-screen bg-[#221f1f] fixed z-10 top-0 h-[50px]'>
             <div className='container text-lg flex justify-between items-center text-white h-[50px] max-w-[1240px] m-auto px-2'>
-                <Link to='/'>React Shop</Link>
+                <a href='/' >React Shop</a>
+                <Search />
                 <ul className='flex justify-between'>
-                    <li className='mr-4 px-[8px] py-1 rounded hover:bg-gray-600 transition cursor-not-allowed'>
+                    <button className='block md:hidden mr-2 px-[8px]' onClick={toggleSearch}>
+                        <FontAwesomeIcon icon={faSearch} />
+                    </button>
+                    <li className='mr-2 px-[8px] py-1 rounded hover:bg-gray-600 transition cursor-not-allowed md:mr-4'>
                         <FontAwesomeIcon icon={faUser} className='text-xl'/>
                     </li>
                     <button className='px-[6px] py-1 rounded hover:bg-gray-600 transition relative' onClick={toggleCart}>

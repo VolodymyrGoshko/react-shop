@@ -7,7 +7,7 @@ import {useSelector} from "react-redux"
 
 export function HomePage() {
     const { data, error, isLoading, status } = useGetProductsAllQuery()
-    const {filters} = useSelector(state => state.product)
+    const {filters, searchFilterProducts} = useSelector(state => state.product)
 
     const filterByCategory = (category) => {
         return data?.filter(product => product.category === category)
@@ -31,10 +31,19 @@ export function HomePage() {
             .map(product => <ProductItem product={product} key={product.id} />)
     }
 
+    const filterSearch = data => {
+        if (data.length > 0) {
+            return data.map(product => <ProductItem product={product} key={product.id}/>)
+        } else {
+            return <p className='mt-[30px] mx-auto'>Products not found...</p>
+        }
+    }
+
     const renderProducts = () => {
         if (filters.category) return filterByCategory(filters.category)
         if (filters.price) return filterByPrice(filters.price)
         if (filters.rating) return filterByRating(filters.rating)
+        if (searchFilterProducts) return filterSearch(searchFilterProducts)
 
         return data?.map(product => <ProductItem product={product} key={product.id}/>)
     }

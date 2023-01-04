@@ -15,8 +15,9 @@ html, body {
 }
 
 body::-webkit-scrollbar,
-.box-item::-webkit-scrollbar{
-    width: 10px;
+.box-item::-webkit-scrollbar,
+.search-box::-webkit-scrollbar{
+    width: 8px;
 }
 
 main {
@@ -26,7 +27,8 @@ main {
 }
 
 body::-webkit-scrollbar-thumb,
-.box-item::-webkit-scrollbar-thumb{
+.box-item::-webkit-scrollbar-thumb,
+.search-box::-webkit-scrollbar-thumb{
     background-color: #ccc;
     border-radius: 20px;
 }

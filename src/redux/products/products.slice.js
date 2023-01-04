@@ -5,7 +5,9 @@ const productsSlice = createSlice({
     initialState: {
         cart: [],
         btnCart: null,
-        filters: {}
+        filters: {},
+        search: false,
+        searchFilterProducts: null
     },
     reducers: {
         clearCart(state, action) {
@@ -34,6 +36,12 @@ const productsSlice = createSlice({
         },
         filtersProductsByCategory(state, action) {
             state.filters = action.payload
+        },
+        toggleSearchForm(state, action) {
+            state.search = action.payload
+        },
+        setSearchFilterProducts(state, action) {
+            state.searchFilterProducts = action.payload
         }
     },
 })
@@ -46,5 +54,7 @@ export const {
     decrementProductInCart,
     toggleBtnCart,
     removeItemFromCart,
-    filtersProductsByCategory
+    filtersProductsByCategory,
+    toggleSearchForm,
+    setSearchFilterProducts
 } = productsSlice.actions
